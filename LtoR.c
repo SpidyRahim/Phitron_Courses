@@ -57,13 +57,13 @@ int main()
     scanf("%d", &n);
     for (int j = 0; j < n; j++)
     {
-        int a, b, i, j, flag;
+        int L, R, flag;
 
-        scanf("%d", &a);
+        scanf("%d", &L);
 
-        scanf("%d", &b);
+        scanf("%d", &R);
 
-        for (i = a; i <= b; i++)
+        for (int i = L; i <= R; i++)
         {
 
             if (i == 0)
@@ -71,7 +71,7 @@ int main()
 
             flag = 1;
 
-            for (j = 2; j <= i / 2; ++j)
+            for (int j = 2; j <= i / 2; ++j)
             {
                 if (i % j == 0)
                 {
