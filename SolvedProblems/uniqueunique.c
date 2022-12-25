@@ -9,16 +9,10 @@ int main()
 	int a[27] = {0};
 	int n;
 	scanf("%d", &n);
-	char str[100];
+	char str[105];
 	scanf("%s", str);
 	int count = 0;
-	/* while (str[i] != '\0')
-	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			a[str[i] - 97]++;
 
-		i++;
-	} */
 	for (int i = 0; str[i] != 0; i++)
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')

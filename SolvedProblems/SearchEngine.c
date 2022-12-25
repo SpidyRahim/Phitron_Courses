@@ -10,16 +10,13 @@ int main()
         int arr[1010];
         int size, i, toSearch, found;
 
-        // printf("Enter size of array: ");
         scanf("%d", &size);
 
-        // printf("Enter elements in array: ");
         for (i = 0; i < size; i++)
         {
             scanf("%d", &arr[i]);
         }
 
-        // printf("\nEnter element to search: ");
         scanf("%d", &toSearch);
 
         found = 0;

@@ -7,11 +7,11 @@ int main()
 {
     int n;
     scanf("%d", &n);
-    int a[n], b[n];
+    int arr1[n], arr2[n];
     for (int i = 0; i < n; i++)
-        scanf("%d", &a[i]);
+        scanf("%d", &arr1[i]);
     for (int i = 0; i < n; i++)
-        scanf("%d", &b[i]);
+        scanf("%d", &arr2[i]);
 
     int temp1, temp2;
 
@@ -19,32 +19,29 @@ int main()
     {
         for (int j = i + 1; j < n; j++)
         {
-            if (a[j] < a[i])
+            if (arr1[j] < arr1[i])
             {
-                temp1 = a[i];
-                a[i] = a[j];
-                a[j] = temp1;
+                temp1 = arr1[i];
+                arr1[i] = arr1[j];
+                arr1[j] = temp1;
             }
         }
-    printf("%d ",a[i]);
     }
-    printf("\n");
 
     for (int i = 0; i < n; i++)
     {
         for (int j = i + 1; j < n; j++)
         {
-            if (b[j] > b[i])
+            if (arr2[j] > arr2[i])
             {
-                temp2 = b[i];
-                b[i] = b[j];
-                b[j] = temp2;
+                temp2 = arr2[i];
+                arr2[i] = arr2[j];
+                arr2[j] = temp2;
             }
         }
-    printf("%d ",b[i]);
     }
 
     for (int i = 0; i < n; i++)
-        printf("%d ", (a[i] - b[i]));
+        printf("%d ", (arr1[i] - arr2[i]));
     return 0;
 }
