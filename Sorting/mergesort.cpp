@@ -79,9 +79,16 @@ void mergeSort(int *arr, int s, int e)
 
 int main()
 {
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int j = 0; j < n; j++)
+    {
+        cin >> arr[j];
+    }
 
-    int arr[15] = {3, 7, 0, 1, 5, 8, 3, 2, 34, 66, 87, 23, 12, 12, 12};
-    int n = 15;
+    /* int arr[15] = {3, 7, 0, 1, 5, 8, 3, 2, 34, 66, 87, 23, 12, 12, 12};
+    int n = 15; */
 
     mergeSort(arr, 0, n - 1);
 
