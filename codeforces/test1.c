@@ -5,10 +5,10 @@
 int main()
 {
     int arr[MAX_SIZE];
-    long long int  i, max, min, size;
+    long long int i, max, min, size;
     long long int n;
     scanf("%lld", &n);
-    for (int k = 0; k < n; k++)
+    for (long long int k = 0; k < n; k++)
     {
         /* Input size of the array */
         // printf("Enter size of the array: ");
@@ -18,7 +18,7 @@ int main()
         // printf("Enter elements in the array: ");
         for (i = 0; i < size; i++)
         {
-            scanf("%d", &arr[i]);
+            scanf("%lld", &arr[i]);
         }
 
         /* Assume first element as maximum and minimum */
@@ -51,7 +51,7 @@ int main()
             printf("%lld", minpro);
             printf(" %lld", mpro);
             printf(" %lld", maxsum);
-            printf(" %lld", minsub);
+            printf(" %lld\n", minsub);
         }
         else
         {
@@ -62,7 +62,7 @@ int main()
             printf("%lld", mpro);
             printf(" %lld", minpro);
             printf(" %lld", maxsum);
-            printf(" %lld", minsub);
+            printf(" %lld\n", minsub);
         }
     }
     return 0;
