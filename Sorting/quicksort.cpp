@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-int partition(int arr[], int s, int e)
+int partition(char arr[], int s, int e)
 {
     int pivot = arr[s];
     int count = 0;
@@ -36,7 +36,7 @@ int partition(int arr[], int s, int e)
     }
 }
 
-void quickSort(int arr[], int s, int e)
+void quickSort(char arr[], int s, int e)
 {
     // base case
     if (s >= e)
@@ -54,7 +54,7 @@ int main()
 {
     int n;
     cin >> n;
-    int arr[n];
+    char arr[n];
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
