@@ -51,14 +51,6 @@ void countSort(int array[], int size)
     }
 }
 
-// Function to print an array
-/* void printArray(int array[], int size)
-{
-    for (int i = 0; i < size; i++)
-        cout << array[i] << " ";
-    cout << endl;
-}
- */
 // Driver code
 int main()
 {
@@ -69,10 +61,10 @@ int main()
     {
         cin >> array[i];
     }
-    //int n = sizeof(array) / sizeof(array[0]);
     countSort(array, n);
     for (int i = 0; i < n; i++)
+    {
         cout << array[i] << " ";
+    }
     cout << endl;
-    //printArray(array, n);
 }

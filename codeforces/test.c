@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-int main() {
+int main() 
+{
     char string[1005];
     scanf("%s",string);
     int length = strlen(string);
@@ -16,7 +17,5 @@ int main() {
     else
     {
         printf("No\n");
-    }
-    
-    
+    } 
 }
