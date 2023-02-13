@@ -120,6 +120,80 @@ public:
         newnode->nxt = a->nxt;                // notun node er next pointer ta hobe agey j a point kore chilo je node e sei node tai hobe ekhon notu n kore pointer of newnode
         a->nxt = newnode;                     // a er next pointer ta hobe newnode er dike locate kora
     }
+
+    void DeleteHead()
+    {
+        if (head == NULL)
+        {
+            return;
+        }
+        sz--;
+
+        node *a = head; // head e point kore ache
+        head = a->nxt;  // bollam tumi porer head ta point koro;
+        delete a;       // delete kore dilam
+    }
+
+    void DeleteAnyIndex(int index)
+    {
+        if (index < 0 || index > sz - 1)
+        {
+            return;
+        }
+        if (index == 0)
+        {
+            DeleteHead();
+            return;
+        }
+        sz--;
+
+        node *a = head; // head e point korechi
+        int cur_index = 0;
+        while (cur_index != index - 1)
+        {
+            a = a->nxt;
+            cur_index++;
+        }
+        node *b = a->nxt;
+        a->nxt = b->nxt;
+        delete b;
+    }
+
+    void InsertAfterValue(int value, int data)
+    {
+        node *a = head;
+
+        while (a != NULL)
+        {
+            if (a->data == value)
+            {
+                break;
+            }
+            a = a->nxt;
+        }
+        if (a == NULL)
+        {
+            cout << value << " doesn't exist \n";
+            return;
+        }
+        sz++;
+        node *newnode = CreateNewNode(data); /// ekhane ami notun node create korlam
+        newnode->nxt = a->nxt;               // notun node er next ta hobe a node er next
+        a->nxt = newnode;                    // a node er next ta jehetu notunnode niy nise tai ekhon e node er next ta hobe notun node
+    }
+
+    void ReversePrint(node *a) // full node ta nibe
+    {
+        if (a == NULL)
+            return;
+        ReversePrint(a->nxt);
+        cout << a->data << " ";
+    }
+    void Reverse()
+    {
+        ReversePrint(head);
+        cout << endl;
+    }
 };
 
 int main()
@@ -150,17 +224,57 @@ int main()
     cout << endl;
     cout << endl;
     cout << endl; */
+
+    /*
     cout << "Size of the Linked List is " << l.getSize() << endl;
     l.InsertAtHead(10);
-    cout << "Size of the Linked List is " << l.getSize() << endl;
-    l.InsertAtHead(5);
-    cout << "Size of the Linked List is " << l.getSize() << endl;
-    l.InsertAtHead(6);
+    l.Traverse();
     cout << "Size of the Linked List is " << l.getSize() << endl;
 
+    l.InsertAtHead(5);
     l.Traverse();
-    l.InsertAtAnyPosition(1, 100);
     cout << "Size of the Linked List is " << l.getSize() << endl;
+
+    l.InsertAtHead(6);
+    l.Traverse();
+    cout << "Size of the Linked List is " << l.getSize() << endl;
+
+    // l.Traverse();
+    l.InsertAtAnyPosition(1, 100);
+    l.Traverse();
+    cout << "Size of the Linked List is " << l.getSize() << endl;
+
+    l.DeleteHead();
+    l.Traverse();
+    cout << l.getSize() << endl;
+
+    l.DeleteAnyIndex(2);
+    l.Traverse();
+    cout << "Size of the Linked List is " << l.getSize() << endl;
+ */
+
+    /* l.InsertAtHead(30);
+    l.InsertAtHead(6);
+    l.InsertAtHead(10);
+    l.Traverse();
+
+    cout << "The size of the linekdlist is " << l.getSize() << endl;
+
+    l.InsertAfterValue(10, 100);
+
+    l.Traverse();
+    cout << "The size of the linekdlist is " << l.getSize() << endl;
+    */
+
+    l.InsertAtHead(30);
+    l.InsertAtHead(6);
+    l.InsertAtHead(10);
+    l.InsertAtHead(1);
+
+    l.Traverse();
+
+    l.Reverse();
+    
     l.Traverse();
 
     return 0;
