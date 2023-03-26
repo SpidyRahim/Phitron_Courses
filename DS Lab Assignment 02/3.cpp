@@ -105,7 +105,7 @@ int main()
 
     for (int i = 0; i < s.size(); i++)
     {
-        if (s[i] >= 'a' && s[i] <= 'z' || s[i] >= 'A' && s[i] <= 'Z')
+        if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
         {
             answer += s[i];
         }
