@@ -1,0 +1,397 @@
+-- select *
+	-- first_name,
+	-- birth_date,
+    -- points
+-- from customers
+-- where state <> 'VA' and birth_date > '1990-01-01';
+-- <> is not equal
+-- use sql_store;
+-- select *
+-- from customers (order er aag porjonto kaj cholse eta diye)
+-- where state in ('VA','GA','FL');
+-- where points between 1000 and 3000;
+-- where last_name like 'b____y';
+-- where last_name like '_y';
+-- where last_name like '%y';
+-- where last_name like 'brush%';
+-- where address like '%trail%' or
+	  -- address like '%avenue%';
+-- where phone like '%9';
+-- where phone not like '%9';
+-- where last_name regexp 'field|mac|rose'; last e eigula thaklei holo
+-- where last_name regexp '^field|^mac|^rose'; prothom e
+-- where last_name regexp 'field$|mac|rose'; last e field
+-- where last_name regexp '[a-h]e'; range er moddhe mil dekhbe
+-- where last_name regexp '[gih]e';  ge ie he evabe dekhbe
+
+
+-- exercise niche ta
+-- where first_name regexp 'elka|ambur';
+-- where last_name regexp 'ey$|on$'; 
+-- where last_name regexp '^my|se'; 
+-- where last_name regexp 'b[ru]'; 
+-- eta evabeo likha jay
+-- where last_name regexp 'br|bu'; 
+
+
+
+-- where phone is null ;
+-- where state is null ;
+
+-- find out the not shiped orders
+-- from orders
+-- where shipper_id is null; 
+
+
+-- from customers
+-- limit 6,3; ekhane prothom number ta diye bujhay prothom 6 jon skip kore next 3 jon dekhabe
+
+
+
+-- JOINING
+-- select order_id , o.customer_id, first_name, last_name
+-- from orders o
+-- join customers c
+-- 	on o.order_id = c.customer_id;
+
+
+-- duita database er moddhe JOINING
+-- select *
+-- from order_items oi
+-- join sql_inventory.products p
+-- on oi.product_id = p.product_id;
+
+-- same db te multiple table joining
+-- use sql_hr;
+-- select e.first_name,
+-- 		m.first_name as manager
+-- from employees e
+-- join employees m 
+-- 	on e.reports_to = m.employee_id;
+
+-- again
+-- use sql_store;
+-- select o.order_id,
+-- 		o.order_date,
+--         c.first_name,
+--         os.name as status
+-- from orders o
+-- join customers c
+-- 	on o.customer_id = c.customer_id
+-- join order_statuses os
+-- 	on o.status = os.order_status_id;
+--     
+-- SELECT MIN(Price) AS small_price
+-- FROM Products;
+
+
+-- group by
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s); 
+
+example
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;
+
+-- self join
+SELECT A.CustomerName AS CustomerName1, B.CustomerName AS CustomerName2, A.City
+FROM Customers A, Customers B
+WHERE A.CustomerID <> B.CustomerID
+AND A.City = B.City
+ORDER BY A.City;
+
+-- TAN Portion
+-- CREATE DATABASE practice;
+-- DROP DATABASE practice;
+
+----- use fixed database -----
+-- USE practices;
+
+------- create table ---------
+-- create table practices.customers(
+-- id INT PRIMARY KEY NOT NULL,
+-- name VARCHAR(45) NOT NULL,
+-- department VARCHAR(100) NOT NULL,
+-- salary DECIMAL(10, 2) NOT NULL
+-- );
+
+-- create table practices.orders(
+-- id INT PRIMARY KEY NOT NULL,
+-- date DATETIME NOT NULL,
+-- total_count INT NOT NULL
+-- );
+
+-------- delete table --------
+-- DROP TABLE practices.customer;
+-- DROP TABLE practices.orders;
+
+------- add and delete column from table --------
+-- ALTER TABLE practices.customers ADD COLUMN order_id INT NOT NULL;
+-- ALTER TABLE practices.customers DROP COLUMN order_id;
+-- ALTER TABLE practices.orders ADD COLUMN total_price DECIMAL(10, 2) NOT NULL;
+
+-------- add auto increment in primary key -----------
+-- ALTER TABLE practices.customers MODIFY id INT AUTO_INCREMENT;
+
+------- add new column for foreign key and update it as a foreign key ---------
+-- ALTER TABLE practices.orders ADD COLUMN customer_id INT NOT NULL;
+-- ALTER TABLE practices.orders ADD CONSTRAINT customer_id FOREIGN KEY(customer_id) REFERENCES practices.customers(id);
+
+--------- drop foreign key column --------
+-- ALTER TABLE practices.orders DROP FOREIGN KEY customer_id;
+
+------ insert data in table --------
+-- INSERT INTO practices.customers(name, department, salary, address) VALUE("Tanvin", "CEO", 500000.34, "Dhaka");
+-- INSERT INTO practices.orders(date, total_count, customer_id, total_price) VALUE("2023-04-01 14:25:08", 3, 2, 5000);
+
+------- delete data from table --------
+-- DELETE FROM practices.orders WHERE practices.orders.total_price > 3000;
+
+-------- update data in table --------
+-- UPDATE practices.customers SET address = "Narayangonj", name="Tanvin Ahmed" WHERE id = 1;
+
+---------- join 2 table ----------
+-- SELECT * FROM practices.orders INNER JOIN practices.customers ON practices.orders.customer_id = practices.customers.id;
+-- SELECT * FROM practices.orders NATURAL JOIN practices.customers;
+
+----- Aggregate Functions -------
+-- SELECT COUNT(*) AS customer_count, MAX(salary) AS max_salary, AVG(salary) AS avarage_salary, MIN(salary) AS minimum_salary FROM practices.customers;
+
+------ group by --------
+-- SELECT department, COUNT(*) AS customer_count, MAX(salary) AS max_salary, AVG(salary) AS avarage_salary, MIN(salary) AS minimum_salary FROM practices.customers GROUP BY department;
+-------------------------------------------
+
+ALTER TABLE -----
+ALTER TABLE Customers
+ADD Email varchar(255);
+
+ALTER TABLE Customers
+DROP COLUMN Email;
+
+format ->
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype; 
+
+ALTER TABLE Persons
+MODIFY COLUMN DateOfBirth year; 
+-------------------------------------------
+MySQL Constraints
+
+SQL constraints are used to specify rules for the data in a table.
+
+Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+
+Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+
+The following constraints are commonly used in SQL:
+
+    NOT NULL - Ensures that a column cannot have a NULL value
+    UNIQUE - Ensures that all values in a column are different
+    PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+    FOREIGN KEY - Prevents actions that would destroy links between tables
+    CHECK - Ensures that the values in a column satisfies a specific condition
+    DEFAULT - Sets a default value for a column if no value is specified
+    CREATE INDEX - Used to create and retrieve data from the database very quickly
+--------------------------------------------
+FOR NOT NULL
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int
+); 
+operation in ALTER TABLE
+ALTER TABLE Persons
+MODIFY Age int NOT NULL;
+---------------------------------------------
+UNIQUE 
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    UNIQUE (ID)
+);
+operation in ALTER TABLE
+UNIQUE Constraint on ALTER TABLE
+
+To create a UNIQUE constraint on the "ID" column when the table is already created, use the following SQL:
+ALTER TABLE Persons
+ADD UNIQUE (ID);
+
+To name a UNIQUE constraint, and to define a UNIQUE constraint on multiple columns, use the following SQL syntax:
+ALTER TABLE Persons
+ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
+DROP a UNIQUE Constraint
+
+To drop a UNIQUE constraint, use the following SQL:
+ALTER TABLE Persons
+DROP INDEX UC_Person;
+---------------------------------------
+MySQL PRIMARY KEY Constraint
+
+The PRIMARY KEY constraint uniquely identifies each record in a table.
+
+Primary keys must contain UNIQUE values, and cannot contain NULL values.
+
+A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+PRIMARY KEY on CREATE TABLE
+
+The following SQL creates a PRIMARY KEY on the "ID" column when the "Persons" table is created:
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
+
+To allow naming of a PRIMARY KEY constraint, and for defining a PRIMARY KEY constraint on multiple columns, use the following SQL syntax:
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+);
+
+Note: In the example above there is only ONE PRIMARY KEY (PK_Person). However, the VALUE of the primary key is made up of TWO COLUMNS (ID + LastName).
+PRIMARY KEY on ALTER TABLE
+
+To create a PRIMARY KEY constraint on the "ID" column when the table is already created, use the following SQL:
+ALTER TABLE Persons
+ADD PRIMARY KEY (ID);
+
+To allow naming of a PRIMARY KEY constraint, and for defining a PRIMARY KEY constraint on multiple columns, use the following SQL syntax:
+ALTER TABLE Persons
+ADD CONSTRAINT PK_Person PRIMARY KEY (ID,LastName);
+
+Note: If you use ALTER TABLE to add a primary key, the primary key column(s) must have been declared to not contain NULL values (when the table was first created).
+DROP a PRIMARY KEY Constraint
+
+To drop a PRIMARY KEY constraint, use the following SQL:
+ALTER TABLE Persons
+DROP PRIMARY KEY;
+
+--------------------------------------------------
+FOREIGN KEY on CREATE TABLE
+
+The following SQL creates a FOREIGN KEY on the "PersonID" column when the "Orders" table is created:
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+To allow naming of a FOREIGN KEY constraint, and for defining a FOREIGN KEY constraint on multiple columns, use the following SQL syntax:
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID)
+    REFERENCES Persons(PersonID)
+);
+FOREIGN KEY on ALTER TABLE
+
+To create a FOREIGN KEY constraint on the "PersonID" column when the "Orders" table is already created, use the following SQL:
+ALTER TABLE Orders
+ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+To allow naming of a FOREIGN KEY constraint, and for defining a FOREIGN KEY constraint on multiple columns, use the following SQL syntax:
+ALTER TABLE Orders
+ADD CONSTRAINT FK_PersonOrder
+FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+DROP a FOREIGN KEY Constraint
+
+To drop a FOREIGN KEY constraint, use the following SQL:
+ALTER TABLE Orders
+DROP FOREIGN KEY FK_PersonOrder; 
+******************************************************
+MySQL CHECK Constraint
+
+The CHECK constraint is used to limit the value range that can be placed in a column.
+
+If you define a CHECK constraint on a column it will allow only certain values for this column.
+
+If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+CHECK on CREATE TABLE
+
+The following SQL creates a CHECK constraint on the "Age" column when the "Persons" table is created. The CHECK constraint ensures that the age of a person must be 18, or older:
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CHECK (Age>=18)
+);
+
+To allow naming of a CHECK constraint, and for defining a CHECK constraint on multiple columns, use the following SQL syntax:
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255),
+    CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
+);
+CHECK on ALTER TABLE
+
+To create a CHECK constraint on the "Age" column when the table is already created, use the following SQL:
+ALTER TABLE Persons
+ADD CHECK (Age>=18);
+
+To allow naming of a CHECK constraint, and for defining a CHECK constraint on multiple columns, use the following SQL syntax:
+ALTER TABLE Persons
+ADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes');
+DROP a CHECK Constraint
+
+To drop a CHECK constraint, use the following SQL:
+ALTER TABLE Persons
+DROP CHECK CHK_PersonAge; 
+
+*********************************************************
+
+
+MySQL DEFAULT Constraint
+
+The DEFAULT constraint is used to set a default value for a column.
+
+The default value will be added to all new records, if no other value is specified.
+DEFAULT on CREATE TABLE
+
+The following SQL sets a DEFAULT value for the "City" column when the "Persons" table is created:
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255) DEFAULT 'Sandnes'
+);
+
+The DEFAULT constraint can also be used to insert system values, by using functions like CURRENT_DATE():
+CREATE TABLE Orders (
+    ID int NOT NULL,
+    OrderNumber int NOT NULL,
+    OrderDate date DEFAULT CURRENT_DATE()
+);
+DEFAULT on ALTER TABLE
+
+To create a DEFAULT constraint on the "City" column when the table is already created, use the following SQL:
+ALTER TABLE Persons
+ALTER City SET DEFAULT 'Sandnes';
+DROP a DEFAULT Constraint
+
+To drop a DEFAULT constraint, use the following SQL:
+ALTER TABLE Persons
+ALTER City DROP DEFAULT; 
+****************************************************
+
+
