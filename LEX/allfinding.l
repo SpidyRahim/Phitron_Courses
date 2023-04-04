@@ -1,0 +1,61 @@
+%{
+	#include<stdio.h>
+	int keywordCount = 0;
+	int commentCount = 0;
+	int whitespaceCount = 0;
+	int newlineCount = 0;
+	int tabCount = 0;
+%}
+
+%%
+
+int|float|char|double|void { // Keywords
+    printf("Keyword: %s\n", yytext);
+    keywordCount++;
+}
+
+\#[a-z]+<[a-z]+.[a-z]+> {
+	printf("This is header file : %s\n",yytext);
+}
+
+[0-9]+ {
+	printf("This is number : %s\n",yytext);
+}
+
+\/\/.* { // Single line comments
+    printf("Single line comment: %s\n", yytext);
+    commentCount++;
+}
+
+\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\/ { // Multi-line comments
+    printf("Multi-line comment: %s\n", yytext);
+    commentCount++;
+}
+
+[ \t]+ { // Whitespace
+    whitespaceCount++;
+}
+
+\n { // Newline
+    newlineCount++;
+}
+
+\t { // Tab
+    tabCount++;
+}
+
+. { // Anything else
+    printf("Other: %s\n", yytext);
+}
+
+%%
+int yywrap()
+{
+	return 1;
+}
+
+int main() {
+    yylex();
+    printf("Keywords: %d\nComments: %d\nWhitespace: %d\nNewlines: %d\nTabs: %d\n", keywordCount, commentCount, whitespaceCount, newlineCount, tabCount);
+    return 0;
+}

@@ -1,0 +1,14 @@
+%%
+[0-9]+ {printf("Number Found : %s\n",yytext);}
+. {}
+%%
+
+int yywrap()
+{	
+	return 1;
+}
+int main(void)
+{
+	yylex();
+	return 0;
+}
